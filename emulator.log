@@ -1,0 +1,3 @@
+i  emulators: Starting emulators: auth, firestore
+i  emulators: Detected demo project ID "demo-no-project", emulated services will use a demo configuration and attempts to access non-emulated services for this project will fail.
+i  firestore: Firestore Emulator logging to firestore-debug.log

@@ -1,0 +1,294 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Represents a Frutiger Chat user profile with custom MSN-style signature, current activity, presence status, and E2EE public key fingerprint.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "The authenticated user UID matching request.auth.uid."
+        },
+        "username": {
+          "type": "string",
+          "description": "Display username in Frutiger Chat (2 to 40 chars)."
+        },
+        "signature": {
+          "type": "string",
+          "description": "Custom personal status signature text (0 to 160 chars)."
+        },
+        "currentActivity": {
+          "type": "string",
+          "description": "Current activity or music/game status text (0 to 120 chars)."
+        },
+        "presenceStatus": {
+          "type": "string",
+          "enum": ["online", "away", "busy", "offline"],
+          "description": "User presence indicator status."
+        },
+        "avatarColor": {
+          "type": "string",
+          "enum": ["aqua", "green", "red", "blue", "gold", "purple"],
+          "description": "Glossy 3D buddy icon color theme."
+        },
+        "publicKeyFingerprint": {
+          "type": "string",
+          "description": "Hexadecimal E2EE identity key fingerprint (8 to 128 chars)."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp populated via FieldValue.serverTimestamp()."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update timestamp populated via FieldValue.serverTimestamp()."
+        }
+      },
+      "required": [
+        "userId",
+        "username",
+        "signature",
+        "currentActivity",
+        "presenceStatus",
+        "avatarColor",
+        "publicKeyFingerprint",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "FriendContact": {
+      "title": "FriendContact",
+      "description": "Represents a buddy in the user's Frutiger Chat friends list.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Owner user ID matching request.auth.uid."
+        },
+        "friendUid": {
+          "type": "string",
+          "description": "Unique identifier for the friend contact."
+        },
+        "friendUsername": {
+          "type": "string",
+          "description": "Friend display name (1 to 40 chars)."
+        },
+        "friendSignature": {
+          "type": "string",
+          "description": "Friend custom signature text (0 to 160 chars)."
+        },
+        "friendActivity": {
+          "type": "string",
+          "description": "Friend current activity text (0 to 120 chars)."
+        },
+        "friendStatus": {
+          "type": "string",
+          "enum": ["online", "away", "busy", "offline"],
+          "description": "Friend online/away/busy/offline status."
+        },
+        "avatarColor": {
+          "type": "string",
+          "enum": ["aqua", "green", "red", "blue", "gold", "purple"],
+          "description": "Friend glossy 3D avatar color."
+        },
+        "publicKeyFingerprint": {
+          "type": "string",
+          "description": "Friend E2EE public key fingerprint."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp via FieldValue.serverTimestamp()."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Update timestamp via FieldValue.serverTimestamp()."
+        }
+      },
+      "required": [
+        "userId",
+        "friendUid",
+        "friendUsername",
+        "friendSignature",
+        "friendActivity",
+        "friendStatus",
+        "avatarColor",
+        "publicKeyFingerprint",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "ChatRoom": {
+      "title": "ChatRoom",
+      "description": "Represents a direct message or group chat conversation with E2EE metadata and participant list.",
+      "type": "object",
+      "properties": {
+        "ownerId": {
+          "type": "string",
+          "description": "Authenticated owner UID matching request.auth.uid."
+        },
+        "participantUids": {
+          "type": "array",
+          "description": "List of participant user UIDs who are members of this chat room (1 to 20 users)."
+        },
+        "title": {
+          "type": "string",
+          "description": "Display title of the direct message or group chat (1 to 60 chars)."
+        },
+        "isGroup": {
+          "type": "boolean",
+          "description": "True if this conversation is a multi-user group chat."
+        },
+        "avatarColor": {
+          "type": "string",
+          "enum": ["aqua", "green", "red", "blue", "gold", "purple", "group"],
+          "description": "Glossy buddy icon theme for the chat."
+        },
+        "presenceStatus": {
+          "type": "string",
+          "enum": ["online", "away", "busy", "offline"],
+          "description": "Presence dot status for the conversation."
+        },
+        "participantNames": {
+          "type": "string",
+          "description": "Comma-separated participant names (1 to 200 chars)."
+        },
+        "lastMessagePreview": {
+          "type": "string",
+          "description": "Preview text of the most recent message (0 to 300 chars)."
+        },
+        "lastMessageSender": {
+          "type": "string",
+          "description": "Sender name of the most recent message (0 to 60 chars)."
+        },
+        "encryptionKeyId": {
+          "type": "string",
+          "description": "Identifier/salt for the conversation AES-256-GCM key (4 to 128 chars)."
+        },
+        "unreadCount": {
+          "type": "integer",
+          "description": "Unread messages count (0 to 10000)."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp via FieldValue.serverTimestamp()."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last message/activity timestamp via FieldValue.serverTimestamp()."
+        }
+      },
+      "required": [
+        "ownerId",
+        "participantUids",
+        "title",
+        "isGroup",
+        "avatarColor",
+        "presenceStatus",
+        "participantNames",
+        "lastMessagePreview",
+        "lastMessageSender",
+        "encryptionKeyId",
+        "unreadCount",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "ChatMessage": {
+      "title": "ChatMessage",
+      "description": "Represents an end-to-end encrypted message inside a ChatRoom.",
+      "type": "object",
+      "properties": {
+        "chatId": {
+          "type": "string",
+          "description": "Parent chat ID matching the path {chatId}."
+        },
+        "ownerId": {
+          "type": "string",
+          "description": "Creator UID matching request.auth.uid."
+        },
+        "participantUids": {
+          "type": "array",
+          "description": "List of participant UIDs allowed to read and receive this message."
+        },
+        "senderId": {
+          "type": "string",
+          "description": "UID or identifier of the sender (1 to 128 chars)."
+        },
+        "senderName": {
+          "type": "string",
+          "description": "Display name of the sender (1 to 60 chars)."
+        },
+        "ciphertext": {
+          "type": "string",
+          "description": "AES-256-GCM encrypted Base64 payload (1 to 4096 chars)."
+        },
+        "iv": {
+          "type": "string",
+          "description": "Base64 initialization vector for AES-256-GCM (8 to 128 chars)."
+        },
+        "signatureHash": {
+          "type": "string",
+          "description": "SHA-256 integrity hash of the message (8 to 128 chars)."
+        },
+        "messageType": {
+          "type": "string",
+          "enum": ["text", "nudge", "water_ripple", "system"],
+          "description": "Type of message or Frutiger Aero interactive effect."
+        },
+        "deliveryStatus": {
+          "type": "string",
+          "enum": ["sent", "delivered", "read"],
+          "description": "Real-time delivery receipt status."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp via FieldValue.serverTimestamp()."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Update timestamp via FieldValue.serverTimestamp()."
+        }
+      },
+      "required": [
+        "chatId",
+        "ownerId",
+        "participantUids",
+        "senderId",
+        "senderName",
+        "ciphertext",
+        "iv",
+        "signatureHash",
+        "messageType",
+        "deliveryStatus",
+        "createdAt",
+        "updatedAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "Stores per-user Frutiger Chat profile, custom signature, activity, and E2EE public key fingerprint."
+    },
+    "/friends/{friendDocId}": {
+      "schema": { "$ref": "#/entities/FriendContact" },
+      "description": "Stores buddy contacts scoped by userId."
+    },
+    "/chats/{chatId}": {
+      "schema": { "$ref": "#/entities/ChatRoom" },
+      "description": "Stores direct message and group chat conversations with multi-device participantUids."
+    },
+    "/chats/{chatId}/messages/{messageId}": {
+      "schema": { "$ref": "#/entities/ChatMessage" },
+      "description": "Stores E2EE encrypted messages inside a conversation accessible to all participantUids."
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "511328474610",
+    "project_id": "gen-lang-client-0571118127",
+    "storage_bucket": "gen-lang-client-0571118127.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:511328474610:android:bc4715e2a7f861cb14476b",
+        "android_client_info": {
+          "package_name": "com.aistudio.frutigerchat.aeroxq"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "511328474610-hr97c5ggbn32cmar407oi2kdn23845su.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aistudio.frutigerchat.aeroxq",
+            "certificate_hash": "634d8836b706a6e2968f4060b92b9e6fa4375d16"
+          }
+        },
+        {
+          "client_id": "511328474610-4up41r1riba18vojgth2cqeg2m53ti7v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdF-VVr2gc61EHfLzjxhTaHJlwiLiq-mw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "511328474610-4up41r1riba18vojgth2cqeg2m53ti7v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,55 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Default deny for unauthenticated requests
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    // 1. User Directory - Live User Sync & Profile Lookup
+    match /users/{userId} {
+      // Allows all signed-in users to discover and live-sync with each other across Android devices
+      allow get, list: if isSignedIn();
+
+      // Users can only write their own profile
+      allow create, update, delete: if isSignedIn() && request.auth.uid == userId;
+    }
+
+    // 2. Friends / Buddy List
+    match /friends/{friendDocId} {
+      allow get, list: if isSignedIn();
+      allow create, update: if isSignedIn() && request.resource.data.userId == request.auth.uid;
+      allow delete: if isSignedIn() && resource.data.userId == request.auth.uid;
+    }
+
+    // 3. Multi-Device Chats & Group Conversations
+    match /chats/{chatId} {
+      // Direct access allowed only to participants or owner
+      allow get: if isSignedIn() && (
+        !('participantUids' in resource.data) ||
+        request.auth.uid in resource.data.participantUids ||
+        resource.data.ownerId == request.auth.uid
+      );
+      // List allowed for authenticated discovery/sync of user's active chats
+      allow list: if isSignedIn();
+      allow create: if isSignedIn();
+      allow update, delete: if isSignedIn() && (
+        !('participantUids' in resource.data) ||
+        request.auth.uid in resource.data.participantUids ||
+        resource.data.ownerId == request.auth.uid
+      );
+
+      // 4. Encrypted Chat Messages Subcollection
+      match /messages/{messageId} {
+        allow get, list: if isSignedIn();
+        allow create, update, delete: if isSignedIn();
+      }
+    }
+  }
+}

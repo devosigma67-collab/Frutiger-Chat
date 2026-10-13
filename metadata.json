@@ -1,0 +1,6 @@
+{
+  "name": "Frutiger Chat",
+  "description": "A Frutiger Aero-inspired encrypted real-time messenger with glossy glassmorphic UI, direct & group chats, custom signatures, and local + Firebase sync.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
